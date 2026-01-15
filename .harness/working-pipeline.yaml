@@ -18,16 +18,14 @@ pipeline:
                   identifier: installdeps
                   spec:
                     shell: Sh
-                    command: |-
-                      pip install -r requirements.txt
+                    command: pip install -r requirements.txt
               - step:
                   type: Run
                   name: RunTests
                   identifier: runtests
                   spec:
                     shell: Sh
-                    command: |-
-                      pytest test_app.py -v
+                    command: pytest test_app.py -v
               - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildPush
