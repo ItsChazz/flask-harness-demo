@@ -1,0 +1,51 @@
+pipeline:
+  name: Flask App Working Pipeline
+  identifier: flask_app_working
+  projectIdentifier: default
+  orgIdentifier: default
+  stages:
+    - stage:
+        name: BuildStage
+        identifier: buildstage
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: InstallDeps
+                  identifier: installdeps
+                  spec:
+                    shell: Sh
+                    command: |-
+                      pip install -r requirements.txt
+              - step:
+                  type: Run
+                  name: RunTests
+                  identifier: runtests
+                  spec:
+                    shell: Sh
+                    command: |-
+                      pytest test_app.py -v
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildPush
+                  identifier: buildpush
+                  spec:
+                    connectorRef: <+input>
+                    repo: <+input>
+                    tags:
+                      - latest
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: <+input>
+        repoName: flask-harness-demo
+        build: <+input>
