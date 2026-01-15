@@ -1,0 +1,19 @@
+template:
+  name: Docker Build and Push
+  identifier: docker_build_push
+  versionLabel: v1
+  type: Step
+  projectIdentifier: default
+  orgIdentifier: default
+  tags:
+    category: docker
+  spec:
+    type: BuildAndPushDockerRegistry
+    spec:
+      connectorRef: <+input>
+      repo: <+input>
+      tags:
+        - <+input>.default(latest)
+        - <+pipeline.sequenceId>
+      dockerfile: <+input>.default(dockerfile)
+      context: <+input>.default(.)

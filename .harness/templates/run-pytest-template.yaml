@@ -1,0 +1,17 @@
+template:
+  name: Run Pytest Tests
+  identifier: run_pytest_tests
+  versionLabel: v1
+  type: Step
+  projectIdentifier: default
+  orgIdentifier: default
+  tags: {}
+  spec:
+    type: Run
+    spec:
+      shell: Sh
+      command: |-
+        pip install -r requirements.txt
+        pytest <+input>.default(test_app.py) -v
+      envVariables:
+        PYTHONUNBUFFERED: "1"

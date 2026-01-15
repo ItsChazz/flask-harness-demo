@@ -1,0 +1,54 @@
+pipeline:
+  name: Flask App with Templates
+  identifier: flask_app_with_templates
+  projectIdentifier: default
+  orgIdentifier: default
+  tags:
+    type: templated
+  stages:
+    - stage:
+        name: Build and Test
+        identifier: build_and_test
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  name: Install Dependencies
+                  identifier: install_deps
+                  type: Run
+                  spec:
+                    shell: Sh
+                    command: pip install -r requirements.txt
+              - step:
+                  name: Run Tests with Template
+                  identifier: run_tests_template
+                  template:
+                    templateRef: run_pytest_tests
+                    versionLabel: v1
+              - step:
+                  name: Build and Push with Template
+                  identifier: build_push_template
+                  template:
+                    templateRef: docker_build_push
+                    versionLabel: v1
+                    templateInputs:
+                      type: BuildAndPushDockerRegistry
+                      spec:
+                        connectorRef: <+input>
+                        repo: chazz801/flask-harness-demo
+                        tags:
+                          - latest
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: <+input>
+        repoName: flask-harness-demo
+        build: <+input>
