@@ -1,0 +1,8 @@
+{
+  "type": "docker",
+  "spec": {
+    "dockerfile": "dockerfile",
+    "context": ".",
+    "buildArgs": {}
+  }
+}

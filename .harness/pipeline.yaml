@@ -90,3 +90,4 @@ pipeline:
         connectorRef: <+input>
         repoName: flask-harness-demo
         build: <+input>
+        detectBuildTool: false
