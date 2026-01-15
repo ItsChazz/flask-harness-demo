@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: chazz801@gmail.com/flask-harness-demo:latest
+        image: chazz801/flask-harness-demo:latest
         ports:
         - containerPort: 5000
         resources:
