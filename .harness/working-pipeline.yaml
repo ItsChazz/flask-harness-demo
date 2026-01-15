@@ -32,7 +32,7 @@ pipeline:
                   identifier: buildpush
                   spec:
                     connectorRef: <+input>
-                    repo: <+input>
+                    repo: chazz801/flask-harness-demo
                     tags:
                       - latest
           platform:

@@ -39,7 +39,7 @@ pipeline:
                   identifier: build_push
                   spec:
                     connectorRef: <+input>
-                    repo: <+input>
+                    repo: chazz801/flask-harness-demo
                     tags:
                       - latest
                     dockerfile: dockerfile

@@ -48,7 +48,7 @@ pipeline:
                   identifier: build_and_push
                   spec:
                     connectorRef: <+input>
-                    repo: <+input>
+                    repo: chazz801/flask-harness-demo
                     tags:
                       - latest
                       - <+pipeline.sequenceId>
