@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return jsonify({
-        "message": "Hello from Harness CI/CD Lab!",
+        "message": "This is a secret webpage made possible from the powerful Harness tool!",
         "status": "success"
     })
 
