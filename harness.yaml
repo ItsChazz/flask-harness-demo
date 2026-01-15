@@ -1,0 +1,21 @@
+version: 1
+kind: pipeline
+spec:
+  stages:
+    - name: build
+      type: ci
+      spec:
+        platform:
+          os: linux
+          arch: amd64
+        runtime:
+          type: docker
+        steps:
+          - name: build
+            type: plugin
+            spec:
+              name: docker
+              inputs:
+                dockerfile: dockerfile
+                repo: flask-harness-demo
+                tags: latest

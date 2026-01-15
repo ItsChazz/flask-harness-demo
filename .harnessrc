@@ -1,0 +1,6 @@
+{
+  "build": {
+    "tool": "docker",
+    "dockerfile": "dockerfile"
+  }
+}
