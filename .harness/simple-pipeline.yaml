@@ -1,0 +1,46 @@
+pipeline:
+  name: Flask App Simple Build
+  identifier: flask_app_simple
+  projectIdentifier: default
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Build
+        identifier: build
+        type: CI
+        spec:
+          cloneCodebase: false
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.harnessImage
+              namespace: harness-delegate-ng
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Manual Git Clone
+                  identifier: manual_clone
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: alpine/git
+                    shell: Sh
+                    command: |
+                      git clone https://github.com/ItsChazz/flask-harness-demo.git /harness
+                      cd /harness
+                      ls -la
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and Push
+                  identifier: build_push
+                  spec:
+                    connectorRef: <+input>
+                    repo: <+input>
+                    tags:
+                      - latest
+                    dockerfile: dockerfile
+                    context: /harness
